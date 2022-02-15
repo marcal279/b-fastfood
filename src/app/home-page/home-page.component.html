@@ -1,0 +1,73 @@
+<style>
+  
+</style>
+
+<app-navbar [currentUser]=this.currentUser></app-navbar>
+
+<button mat-fab color="primary" aria-label="Cart" id="cart-link" (click)="goToCart()">
+  <mat-icon>shopping_cart</mat-icon>
+</button>
+
+<div id="title">
+  <div class="title-divs" style="background: url(../../assets/images/blob.svg); background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center center;"> 
+    <img src="../../assets/images/homepage-image.png" style="height: 43rem;"> 
+  </div>
+  <div class="title-divs">
+    <h1>Delivered fast and fresh</h1>
+    <h3 style="font-size: 1.5rem; position: relative; bottom: 10.5rem;">Right to your doorstep</h3>
+    <button mat-raised-button class="custom-button" id="order-in-button"><mat-icon>fastfood</mat-icon>Order In</button>
+    <button mat-raised-button class="custom-button" id="dine-out-button"><i class="fas fa-utensils"></i>Dine Out</button>
+  </div>
+</div>
+
+<div id="why-us">
+  <h3>Meet the best in food delivery</h3>
+  <div style="display: flex; width: 100%; flex-flow: row wrap; justify-content: center;">
+    <div class="why-us-reason">
+      <i class="fas fa-hamburger"></i>
+      <h4>From Gourmet to Street Food</h4>
+      <h6>We have it all</h6>
+    </div>
+    <div class="why-us-reason">
+      <i class="fas fa-map-marked-alt"></i>
+      <h4>Ain't no mountain high enough</h4>
+      <h6>We'll get you your food anywhere, anytime</h6>
+    </div>
+    <div class="why-us-reason">
+      <i class="far fa-credit-card"></i>
+      <h4>Pay by Cash, Card, UPI or Dogecoin</h4>
+      <h6>Any way that's most convenient to you</h6>
+    </div>
+  </div>
+</div>
+
+<div id="featured">
+  <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 2rem;">
+    <h3>Crowd Favourites</h3>
+  </div>
+  <!-- turn this ul below this into a component -->
+  <ul style="display: flex; flex-flow: row wrap; list-style-type: none;">
+    <li *ngFor="let item of favouriteFoods; index as i" style="width: 323px;">
+        <mat-card style="margin: 0.5rem; border-radius: 0.75rem; padding: 1.5rem 1.5rem 1rem;">
+            <mat-card-title-group>
+                <mat-card-title>{{item.name}}</mat-card-title>
+                <mat-card-subtitle><strong>₹{{item.price}}</strong> {{item.restraunt}}</mat-card-subtitle>
+                <img mat-card-md-image src="{{item.image}}">
+            </mat-card-title-group>
+            <mat-card-content>
+                <em>{{item.desc}}</em>
+                <div style="margin-right: 5%;" class="cart-actions">
+                  <mat-icon (click)="removeItem(item)">remove</mat-icon>
+                  <span style="position: relative; bottom: 0.45rem;">{{item.qty}}</span>
+                  <mat-icon (click)="addItem(item)">add</mat-icon>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </li>
+</ul>
+</div>
+
+<app-footer></app-footer>
+<!-- To be continued -->

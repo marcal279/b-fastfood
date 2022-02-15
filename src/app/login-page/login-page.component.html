@@ -1,0 +1,57 @@
+<div class="wave-bg">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button style="margin-right: 1rem;"><mat-icon>menu</mat-icon></button>
+        <span style="font-family: 'Ubuntu', 'Roboto';">Barco FastFood</span>
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-raised-button style="color: rgb(116, 38, 189);" class="nav-button">Can't Log In?</button>
+        <button mat-raised-button color="primary" class="nav-button">Contact Us</button>
+        <button mat-icon-button  class="nav-button"><mat-icon>share</mat-icon></button>
+      </mat-toolbar-row>  
+    </mat-toolbar>
+
+    <mat-card style="margin: 5% 20%;">
+        <div class = "flex-container">
+            <div class="flex-item"><img src="../../assets/images/man-delivery.png" style="height: 27rem;"></div>
+            <div class="flex-item" style="text-align: left;">
+                <mat-card-title>Fresh. Fast. Flexible</mat-card-title>
+                <mat-card-subtitle>Delivering food speedily wherever, whenever</mat-card-subtitle>
+                <mat-card-content>
+                    <h2 id="sign-in-heading">Sign In</h2>
+                    <form class="login-form">
+                        <mat-form-field appearance="outline" style="width: 80%;">
+                            <mat-label>Email</mat-label>
+                            <input type="email" matInput [formControl]="emailFormControl" placeholder="Eg: pat@example.com" #emailid>
+                            <mat-hint>Something to contact you by :)</mat-hint>
+                            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="emailFormControl.hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-icon *ngIf="!emailFormControl.hasError('email') && !emailFormControl.hasError('required')" class="looks-good-tick">check_circle</mat-icon>
+
+                        <mat-form-field appearance="outline" style="width: 80%; margin-top: 0.5rem;">
+                            <mat-label>Password</mat-label>
+                            <input type="{{hide?'password':'text'}}" matInput placeholder="Password" #password>
+                            <button mat-icon-button matSuffix (click)="hide = !hide"><mat-icon>{{hide?'visibility_off':'visibility'}}</mat-icon></button>
+                            <mat-hint>Something only you'll know <em>(and remember, hopefully)</em></mat-hint>
+                        </mat-form-field>
+                        <mat-icon *ngIf="validPassword(password.value)" class="looks-good-tick">check_circle</mat-icon>
+                    </form>
+                    <button mat-raised-button color="primary" class="login-buttons" (click)="signIn(emailid.value, password.value)">Sign In</button> 
+                    <button mat-raised-button class="login-buttons" style="margin-top: 0.5rem; color: rgb(116, 38, 189);">Create Account</button>
+                    <div id='or-with'>
+                        <span>Or sign in with:</span>
+                        <button mat-icon-button color="primary"><i class="fab fa-google"></i></button>
+                        <button mat-icon-button color="primary"><i class="fab fa-twitter"></i></button>
+                        <button mat-icon-button color="primary"><i class="fab fa-github"></i></button>
+                        <button mat-icon-button color="primary"><i class="fab fa-facebook"></i></button>
+                        <button mat-icon-button color="primary"><i class="fab fa-twitter"></i></button>
+                    </div>
+                </mat-card-content>
+            </div>
+        </div>
+    </mat-card>
+</div>

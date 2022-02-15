@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button style="margin-right: 1rem;"><mat-icon>menu</mat-icon></button>
+    <span style="font-family: 'Ubuntu', 'Roboto';">Barco FastFood</span>
+    <span style="flex: 1 1 auto;"></span>
+    <button mat-flat-button color="primary" class="nav-button" (click)="goHome()">Home</button>
+    <button mat-flat-button color="primary" class="nav-button">Contact Us</button>
+    <button mat-flat-button color="accent" style="color: rgb(255, 255, 255);" class="nav-button">FastFood Premium</button>
+    <button mat-icon-button  class="nav-button"><mat-icon>share</mat-icon></button>
+    <button mat-icon-button  class="nav-button" routerLink="../login"><mat-icon>remove_circle_outline</mat-icon></button>
+  </mat-toolbar-row>  
+</mat-toolbar>

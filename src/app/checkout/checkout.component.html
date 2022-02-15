@@ -1,0 +1,124 @@
+<style>
+    
+</style>
+
+<app-navbar [currentUser]=this.currentUser></app-navbar>
+
+<h3 style="margin: 2rem 1rem 0.5rem 3rem;" (click)="isThereUser()">Just a last couple of steps between you and deliciousness</h3>
+
+<mat-stepper [linear]="false" #stepper style="margin: 0rem 5rem 0rem 2rem;">
+    
+    <mat-step>
+        <ng-template matStepLabel=>
+            Your Cart
+        </ng-template>
+        <h4 style="font-size: 1rem;">Check what you've ordered</h4>
+        <ul style="display: flex; flex-flow: row wrap;">
+            <li *ngFor="let cartItem of cartItems; index as i" style="width: 323px;">
+                <mat-card style="margin: 0.5rem; border-radius: 0.75rem; padding: 1.5rem 1.5rem 1rem;">
+                    <mat-card-title-group>
+                        <mat-card-title>{{cartItem.name}}</mat-card-title>
+                        <mat-card-subtitle><strong>₹{{cartItem.price}}</strong> {{cartItem.restraunt}}</mat-card-subtitle>
+                        <img mat-card-md-image src="{{cartItem.image}}">
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        <em>{{cartItem.desc}}</em>
+                        <div style="margin-right: 5%;" class="cart-actions">
+                            <mat-icon (click)="removeItem(cartItem)">remove</mat-icon>
+                            <span style="position: relative; bottom: 0.45rem;">{{cartItem.qty}}</span>
+                            <mat-icon (click)="addItem(cartItem)">add</mat-icon>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </li>
+        </ul>
+        <h3 style="font-size: 1.25rem;">Your Total: <span id="total-price">₹ {{this.foodPrice}}</span></h3>
+        <button mat-raised-button matStepperNext>Next</button>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel=>
+            Delivery Details
+        </ng-template>
+        <form class="delivery-form" *ngIf="this.currentUser">
+            <mat-form-field appearance="outline" style="width: 30%;">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput placeholder="" [value]="this.currentUser['name']" #name>
+                <mat-error *ngIf="nameFormControl.hasError('required')">
+                    Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-icon class="looks-good-tick">check_circle</mat-icon>
+
+            <div *ngIf="this.currentUser['age']" style=" display: inline-block;">
+                <mat-form-field appearance="outline" style="width: 30%; margin-left: 3.5rem;">
+                    <mat-label>Age</mat-label>
+                    <input type="text" matInput placeholder="" [value]="this.currentUser['age']" #age>
+                </mat-form-field>
+                <mat-icon class="looks-good-tick">check_circle</mat-icon>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline" style="width: 10%;">
+                    <mat-label>Select address</mat-label>
+                    <mat-select [(value)]="addressSelected">
+                    <mat-option *ngFor="let label of this.addressLabels" value="{{label}}">{{label}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="width: 50%; margin-left: 1.5rem;">
+                    <mat-label>Address</mat-label>
+                    <input type="text" matInput placeholder="" [value]="getSelectedAddr()" #addressVal>
+                </mat-form-field>
+                <mat-icon *ngIf="addressVal.value" class="looks-good-tick">check_circle</mat-icon>
+            </div>
+        </form>
+        <button mat-raised-button matStepperPrevious>Previous</button>
+        <button mat-raised-button matStepperNext>Next</button>
+    </mat-step>
+    
+    <mat-step>
+        <ng-template matStepLabel=>
+            Payment
+        </ng-template>
+        <h3>Your Bill</h3>
+        <div style="display: flex; width: 100%; flex-flow: row wrap; justify-content: center;">
+            <div style="display: flex; padding: 2rem 2rem 2rem 0rem; border-radius: 1.25rem; border: solid 2px rgb(174, 35, 255);">
+                <ul style="list-style-type: none;">
+                    <li style="color: rgb(174, 35, 255);">
+                        <span style="margin-right: 3rem; display: inline-block; width: 7rem;"><strong>Cart Item</strong></span>
+                        <span style="margin-right: 3rem;">Qty.</span>
+                        <span><strong>Price</strong></span>
+                    </li>
+                    <li *ngFor="let cartItem of cartItems; index as i">
+                        <span style="margin-right: 3rem; display: inline-block; width: 7rem;"><strong>{{cartItem['name']}}</strong></span>
+                        <span style="margin-right: 3rem;">x {{cartItem['qty']}}</span>
+                        <span style="margin-left: 0.5rem;"><strong *ngIf="cartItem['qty']">₹{{+cartItem['price'] * +cartItem['qty']}}</strong></span>
+                    </li>
+                    <mat-divider></mat-divider>
+                    <li>
+                        <span style="margin-right: 2.8rem; display: inline-block; width: 7rem;"><strong>Taxes</strong></span>
+                        <span style="margin-right: 2.3rem;">12.5%</span>
+                        <span><strong>₹ {{this.taxAmount}}</strong></span>
+                    </li>
+                    <mat-divider></mat-divider>
+                    <li>
+                        <span style="margin-right: 3rem; display: inline-block; width: 7rem;"><strong>Tip</strong></span>
+                        <span style="display: inline-block; width: 5rem;"></span>
+                        <span><strong>₹15</strong></span>
+                    </li>
+                    <mat-divider></mat-divider>
+                    <li style="color: rgb(174, 35, 255);">
+                        <span style="margin-right: 3rem; display: inline-block; width: 7rem;"><strong>Total</strong></span>
+                        <span style="display: inline-block; width: 4rem;"></span>
+                        <span><strong>₹ {{this.totalPrice + 15}}</strong></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button mat-raised-button matStepperPrevious>Previous</button>
+        <button mat-raised-button>Pay Now</button>
+    </mat-step>
+
+</mat-stepper>
+
+<app-footer></app-footer>
