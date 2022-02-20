@@ -3,6 +3,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { User } from '../user';
 import { FoodItem } from '../food-item';
 import { FavouriteFoods } from '../favourite-foods';
+import { MatDialog }from '@angular/material/dialog';
+import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.component';
 
 @Component({
   selector: 'app-checkout',
@@ -29,13 +31,14 @@ export class CheckoutComponent implements OnInit {
   }
   addressSelected = 'Home'; // default
 
-  constructor() { }
+  constructor(public dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.currentUser = history.state.data;
     this.getAddrLabels();
     this.getFoodPrice();
     this.getTaxAmount();
+    // this.stripePaymentGateway();
   }
 
   isThereUser(): void{
@@ -62,6 +65,8 @@ export class CheckoutComponent implements OnInit {
       if(item['qty']>0){
         item['qty'] = +item['qty'] - 1;
         this.foodPrice = this.foodPrice - +item['price']; 
+        this.taxAmount = this.taxAmount - (+item['price']*this.taxRate/100);
+        this.totalPrice = this.totalPrice - +item['price'] - (+item['price']*this.taxRate/100);
       }
     }
   }
@@ -72,6 +77,8 @@ export class CheckoutComponent implements OnInit {
     }
     else item['qty'] = 1;
     this.foodPrice = this.foodPrice + +item['price']; 
+    this.taxAmount = this.taxAmount + (+item['price']*this.taxRate/100);
+    this.totalPrice = this.totalPrice + +item['price'] + (+item['price']*this.taxRate/100);
   }
 
   taxRate = 12.5;
@@ -83,5 +90,12 @@ export class CheckoutComponent implements OnInit {
     this.totalPrice = this.foodPrice + this.taxAmount
   }
 
+  openPayDialog(): void{
+    const dialogRef = this.dialog.open(PaymentDialogComponent);
 
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(`${result}`);
+    });
+  }
 }
+

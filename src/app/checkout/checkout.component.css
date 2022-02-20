@@ -46,3 +46,27 @@ ul{
   border-radius: 1rem;
   margin-left: 0.5rem;
 }
+
+button{
+  margin: 0rem 0.2rem;
+}
+
+#bill-flex-container{
+  display: flex; 
+  width: 100%; 
+  flex-flow: row wrap; 
+  justify-content: center;
+}
+
+#bill{
+  display: flex; 
+  padding: 2rem 2rem 2rem 0rem; 
+  border-radius: 1.25rem; 
+  border: solid 2px rgb(174, 35, 255);
+}
+
+#bill ul{ list-style-type: none; }
+
+.purple-text{
+  color: rgb(174, 35, 255);
+}

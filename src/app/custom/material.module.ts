@@ -20,6 +20,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
     imports: [
@@ -35,6 +37,7 @@ import {MatDividerModule} from '@angular/material/divider';
         MatStepperModule,
         MatSelectModule,
         MatDividerModule,
+        MatDialogModule,
     ],
     exports: [
         CommonModule,
@@ -49,33 +52,9 @@ import {MatDividerModule} from '@angular/material/divider';
         MatStepperModule,
         MatSelectModule,
         MatDividerModule,
+        MatDialogModule,
     ]
 })
 
 export class CustomMaterialModule { }
-// @NgModule({
-//   imports: [
-//   CommonModule, 
-//   MatToolbarModule,
-//   MatButtonModule, 
-//   MatCardModule,
-//   MatInputModule,
-//   MatDialogModule,
-//   MatTableModule,
-//   MatMenuModule,
-//   MatIconModule,
-//   MatProgressSpinnerModule
-//   ],
-//   exports: [
-//   CommonModule,
-//    MatToolbarModule, 
-//    MatButtonModule, 
-//    MatCardModule, 
-//    MatInputModule, 
-//    MatDialogModule, 
-//    MatTableModule, 
-//    MatMenuModule,
-//    MatIconModule,
-//    MatProgressSpinnerModule
-//    ],
-// })
+

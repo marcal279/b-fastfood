@@ -81,10 +81,10 @@
             Payment
         </ng-template>
         <h3>Your Bill</h3>
-        <div style="display: flex; width: 100%; flex-flow: row wrap; justify-content: center;">
-            <div style="display: flex; padding: 2rem 2rem 2rem 0rem; border-radius: 1.25rem; border: solid 2px rgb(174, 35, 255);">
-                <ul style="list-style-type: none;">
-                    <li style="color: rgb(174, 35, 255);">
+        <div id="bill-flex-container">
+            <div id="bill">
+                <ul>
+                    <li class="purple-text">
                         <span style="margin-right: 3rem; display: inline-block; width: 7rem;"><strong>Cart Item</strong></span>
                         <span style="margin-right: 3rem;">Qty.</span>
                         <span><strong>Price</strong></span>
@@ -107,7 +107,7 @@
                         <span><strong>₹15</strong></span>
                     </li>
                     <mat-divider></mat-divider>
-                    <li style="color: rgb(174, 35, 255);">
+                    <li class="purple-text">
                         <span style="margin-right: 3rem; display: inline-block; width: 7rem;"><strong>Total</strong></span>
                         <span style="display: inline-block; width: 4rem;"></span>
                         <span><strong>₹ {{this.totalPrice + 15}}</strong></span>
@@ -116,7 +116,7 @@
             </div>
         </div>
         <button mat-raised-button matStepperPrevious>Previous</button>
-        <button mat-raised-button>Pay Now</button>
+        <button mat-raised-button (click)="openPayDialog()">Pay Now</button>
     </mat-step>
 
 </mat-stepper>

@@ -13,6 +13,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FooterComponent } from './footer/footer.component';
     HomePageComponent,
     CheckoutComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    PaymentDialogComponent
   ],
   imports: [
     BrowserModule,
