@@ -1,5 +1,9 @@
 # BarcoFastfood
 
+Login Credentials:
+Username: marc@gmail.com
+Password: admin@123
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
 
 ## Development server
